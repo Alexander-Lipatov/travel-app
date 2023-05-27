@@ -9,12 +9,16 @@
       aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
       {% if user.is_authenticated %}
-        {% comment %} Блок для отображения зарегистрированного пользователя {% endcomment %}
+      <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
+        </ul>
+        <p>Добро пожаловать, {{ user.username }}!</p>
+            <a href="{% url 'logout' %}">Выйти</a>
       {% else %}
         <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
         </ul>
-        <form class="ps-lg-5">
-          <button class="btn btn-lg btn-outline-primary order-0" type="submit">Регистрация ВК</button>
+
+        <form class="ps-lg-5" action="/login/vk-oauth2">
+          <button class="btn btn-lg btn-outline-primary order-0" type="submit">Войти через ВК</button>
         </form>
       {% endif %}
       

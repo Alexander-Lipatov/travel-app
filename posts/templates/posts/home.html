@@ -10,7 +10,12 @@
         <div class="col-md-7 col-lg-6 text-center text-md-start py-8">
           <h1 class="mb-4 lh-sm">Откройте новые горизонты:<br class="d-block d-lg-none d-xl-block" />Запишите свои впечатления о мире!</h1>
           <p class="mt-4 mb-5 fs-1 lh-base">Откройте удивительный мир приключений! Сохраняйте впечатления о местах, от путешествий до уголков вашего города. Запишите эмоции, откройте горизонты и делитесь приключениями, вдохновляя на путешествия!</p>
-          <a class="btn btn-lg btn-primary hover-top" href="#" role="button">Войти через ВК</a>
+          {%if user.is_authenticated%}
+          <a class="btn btn-lg btn-primary hover-top" href={%url 'posts'%} role="button">Перейти к записям</a>
+
+          {%else%}
+          <a class="btn btn-lg btn-primary hover-top" href="/login/vk-oauth2" role="button">Войти через ВК</a>
+          {%endif%}
         </div>
       </div>
     </div>
