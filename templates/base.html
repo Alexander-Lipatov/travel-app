@@ -1,25 +1,56 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Travel app</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;sdisplay=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Travel app</title>
 
-    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/theme.css' %}" rel="stylesheet" />
-  </head>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;sdisplay=swap"
+    rel="stylesheet" />
 
-  <body>
-    <main class="main" id="top">
-      {% include './header.html' %} {% block context %}{% endblock %}
-    </main>
-    <script src="{% static 'js/theme.js' %}"></script>
-  </body>
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+
+  <!-- <script src="https://api-maps.yandex.ru/2.1/?apikey=ce7bdeda-cd01-4242-a1a6-7dfb61b23c4f&lang=ru_RU"
+    type="text/javascript">
+    </script> -->
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=ce7bdeda-cd01-4242-a1a6-7dfb61b23c4f&lang=ru_RU"
+    type="text/javascript"></script>
+
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body class="">
+  <main class="main " id="top">
+    <div class="container d-flex flex-column min-vh-100">
+      <header class="d-flex flex-wrap align-items-center justify-content-md-between justify-content-md-between py-3">
+        {% include './header.html' %}
+      </header>
+
+      {% block context %}{% endblock %}
+      <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+          <span class="text-muted">Шагайте в ритме своих мечтаний: Покоряйте мир смело и неутомимо!</span>
+        </div>
+      </footer>
+    </div>
+
+
+
+  </main>
+
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/maps.js' %}"></script>
+
+  {% block js_loader %}{% endblock %}
+</body>
+
 </html>

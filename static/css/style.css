@@ -1,3 +1,94 @@
-body {
-    overflow: hidden;
+:root {
+    --logo-color-text: #4298f3
 }
+
+
+.navbar-brand span {
+    color: var(--logo-color-text)
+}
+
+.vk-login button {
+    background-color: var(--logo-color-text);
+    color: white;
+    border-radius: 0;
+    border: none;
+}
+
+.vk-login img {
+    width: 24px;
+    position: relative;
+    bottom: 2px;
+}
+
+.btn-profile {
+    padding: 0;
+    background: none;
+    color: black;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-profile img {
+    border-radius: 50%;
+    width: 43px;
+}
+
+ul.dropdown-menu {
+    border-radius: 0px;
+}
+
+a.dropdown-item:active {
+    background-color: var(--logo-color-text);
+}
+
+h1.heading-page {
+    font-size: x-large;
+}
+
+.main-bg img {
+    left: auto;
+    right: 0px;
+    width: 600px;
+}
+
+a.btn {
+    border-radius: 0%;
+    background-color: var(--logo-color-text);
+    border: none;
+}
+
+button.btn-create-travel {
+    background-color: var(--logo-color-text);
+    color: white;
+    border: none;
+    border-radius: 0%;
+}
+
+button.btn-create-travel:active {
+    background-color: var(--bs-btn-active-bg);
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.preview {
+    height: 225px;
+}
+

@@ -1,5 +1,76 @@
 {% extends 'base.html' %}
 
 {% block context %}
+<h2 class="text-center">Мои впечатления</h2>
+<div class="d-flex justify-content-center my-3"><a href="{% url 'create-post' %}"
+    class="btn btn-primary btn-create-travel">Создать воспоминание</a></div>
 
+<div class="album my-3">
+  <div class="container">
+
+
+    {% if not posts %}
+    <div class="row">
+      <div class="col d-flex align-items-center justify-content-center">У вас нет ни одного воспоминания</div>
+    </div>
+
+    {%else%}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
+    {%for post in posts%}
+    <div class="col">
+      <div class="card shadow-sm">
+        <div class="preview d-flex align-items-center">
+          <div id="loader" class="loader"></div>
+          <img class="image" src="{{post.image_screen_url}}" data-src="{{post.image_screen_url}}"
+            style="display: none;">
+        </div>
+        <div class="card-body">
+          <h4>{{ post.title }}</h4>
+          <p class="card-text">{{ post.comment }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+
+            <small class="text-muted">{{ post.created_date }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% endif %}
+
+
+
+</div>
+</div>
+
+</div>
 {% endblock context %}
+
+{% block js_loader %}
+<script>
+  var imageContainers = document.getElementsByClassName('preview');
+  console.log('1', imageContainers);
+  Array.from(imageContainers).forEach(function (container) {
+    console.log('2', container);
+    var loader = container.getElementsByClassName('loader')[0];
+    var image = container.getElementsByClassName('image')[0];
+
+    console.log('3', loader, image);
+
+    if (loader && image) {
+      image.onload = function () {
+        setTimeout(function () {
+          loader.style.display = 'none';
+          image.style.display = 'block';
+        }, 100); // Задержка в 100 миллисекунд
+      };
+
+      image.src = image.dataset.src;
+    }
+
+  });
+
+
+</script>
+{% endblock %}

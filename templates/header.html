@@ -1,27 +1,35 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg fixed-top py-3 backdrop" data-navbar-on-scroll="data-navbar-on-scroll">
-  <div class="container">
-    <a class="navbar-brand d-flex align-items-center fw-bold fs-2" href="#"><img
-        class="d-inline-block align-top img-fluid" src="{% static 'img/gallery/logo-icon.png' %}" alt=""
-        width="50" /><span class="text-primary fs-4 ps-2">ExploraTrip</span></a>
-    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-      aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-      {% if user.is_authenticated %}
-      <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
-        </ul>
-        <p>Добро пожаловать, {{ user.username }}!</p>
-            <a href="{% url 'logout' %}">Выйти</a>
-      {% else %}
-        <ul class="navbar-nav ms-auto pt-2 pt-lg-0">
-        </ul>
+<a class="navbar-brand col-md-3 d-flex align-items-center fw-bold fs-2" href="{%url 'home'%}">
+  <img class="d-inline-block align-top img-fluid" src="{% static 'img/gallery/logo-icon.png' %}" alt="" width="50" />
+  <span class="fs-4 ps-2">ExploraTrip</span>
+</a>
 
-        <form class="ps-lg-5" action="/login/vk-oauth2">
-          <button class="btn btn-lg btn-outline-primary order-0" type="submit">Войти через ВК</button>
-        </form>
-      {% endif %}
-      
-    </div>
+<!-- <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+  <li><a href="{%url 'home'%}" class="nav-link px-2 link-secondary">Главная</a></li>
+
+
+  <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
+  <li><a href="#" class="nav-link px-2 link-dark">О сайте</a></li>
+
+</ul> -->
+<div class="col-md-3 text-end">
+  {% if not user.is_authenticated %}
+  <form class="vk-login ps-lg-5" action="/login/vk-oauth2">
+
+    <button class="btn btn-lg btn-outline-primary order-0" type="submit">
+      <img src="{% static 'img/vk-logo.svg' %}" alt="">
+      Войти через ВК
+    </button>
+  </form>
+  {%else%}
+  <div class="btn-group">
+    <button class="btn-profile dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <img class="image-profile" src="{{ user.profile_photo.url }}" alt="Profile Photo">
+      {% if not user.first_name %} {{user.username}} {% else %} {{user.first_name}} {% endif %}
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
+    </ul>
   </div>
-</nav>
+  {% endif %}
+</div>
