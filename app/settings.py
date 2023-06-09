@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q5_v#&wy4*41$3qg-as_b9f70okktdq4_4&ut2qom*)7yx#t*c'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -149,16 +153,13 @@ SOCIAL_AUTH_PIPELINE = (
 )
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 AUTHENTICATION_BACKENDS = (
-    # бекенд авторизации через ВКонтакте
     'social_core.backends.vk.VKOAuth2',
-    # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
     'django.contrib.auth.backends.ModelBackend',
 )
-SOCIAL_AUTH_VK_OAUTH2_KEY = '51658782'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = 'W9Nd4aGDucApdI7MzxhI'
+SOCIAL_AUTH_VK_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_VK_OAUTH2_KEY')
+SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_VK_OAUTH2_SECRET')
 LOGIN_REDIRECT_URL = 'home'
-# SOCIAL_AUTH_VK_OAUTH2_EXTRA_DATA = ['photo_max_orig']
-SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'photos']
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 
 
 # User
