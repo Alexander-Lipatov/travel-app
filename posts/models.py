@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class PostModel(models.Model):
-    '''Модель для публиций постов'''
+    """A model for publishing posts"""
 
     title = models.CharField('Заголовок', max_length=100)
     comment = models.TextField('Комментарий путешествия')

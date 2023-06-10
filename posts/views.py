@@ -1,44 +1,38 @@
-from typing import Any
-
 from django.shortcuts import redirect
-
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, CreateView
 
 from .models import PostModel
 from .forms import PostsForm
 
-from django.views.generic import TemplateView, ListView, CreateView
-
 
 class HomePageView(ListView):
-    '''Данный класс представления отвечает за 
-    отображение главной страницы и списка публикаций'''
+    """This view class is responsible for 
+    displaying the main page and the list of publications
+    """
 
     template_name = './posts/home.html'
     model = PostModel
 
     def get_template_names(self):
-        '''Данный метод позволит нам сменить шаблон
-        в зависимости авторизован user или нет'''
         if self.request.user.is_authenticated:
-            self.template_name = './posts/posts.html'  # Шаблон списка публикаций
+            self.template_name = './posts/posts.html'
         return super().get_template_names()
 
     def get_context_data(self, **kwargs):
-        '''пробразываем домолнительные контексты 
-        для использования в шаблоне'''
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             # Получение публикаций только для аутентифицированного пользователя
-            posts = PostModel.objects.filter(owner=self.request.user).order_by('-created_date')
-            context['posts'] = posts
+            posts = PostModel.objects.filter(owner=self.request.user)
+            context['posts'] = posts.order_by('-created_date')
         return context
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):
-    '''Данный класс представления отвечает 
-    за отображение формы создания путешествия'''
+    """This representation class responds to
+    for displaying the travel creation form
+    """
 
     model = PostModel
     form_class = PostsForm
@@ -52,7 +46,9 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 
 
 def logout_view(request):
-    '''Данный метод представления отвечает за выход пользователя из системы'''
+    """This presentation method is responsible 
+    for the user logging out of the system
+    """
 
     logout(request)
     return redirect('home')
