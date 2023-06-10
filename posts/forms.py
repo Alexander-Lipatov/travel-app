@@ -13,13 +13,13 @@ class PostsForm(forms.ModelForm):
     )
     address = forms.CharField(
         label='Адрес местоположения:',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Название',}),
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Адрес',}),
         required=True
 
     )
     title = forms.CharField(
         label='Название вашего путешествия:',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Адрес',}),
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Заголовок',}),
         required=True
 
     )
