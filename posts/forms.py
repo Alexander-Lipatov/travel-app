@@ -27,9 +27,8 @@ class PostsForm(forms.ModelForm):
 
     class Meta:
         model = PostModel
-        fields = '__all__'
+        fields = ('comment', 'address', 'title', 'coords', 'image_screen_url')
         widgets = {
-            'owner': forms.HiddenInput(attrs={'hidden': True}),
             'coords': forms.HiddenInput(attrs={'hidden': True}),
             'image_screen_url': forms.HiddenInput(attrs={'hidden': True}),
         }
