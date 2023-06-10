@@ -3,29 +3,23 @@
   <img class="d-inline-block align-top img-fluid" src="{% static 'img/logo-icon.png' %}" alt="" width="50" />
   <span class="fs-4 ps-2">ExploraTrip</span>
 </a>
-
-<!-- <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-  <li><a href="{%url 'home'%}" class="nav-link px-2 link-secondary">Главная</a></li>
-
-
-  <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-  <li><a href="#" class="nav-link px-2 link-dark">О сайте</a></li>
-
-</ul> -->
 <div class="col-md-3 text-end">
   {% if not user.is_authenticated %}
   <form class="vk-login ps-lg-5" action="/login/vk-oauth2">
-
     <button class="btn btn-lg btn-outline-primary order-0" type="submit">
       <img src="{% static 'img/vk-logo.svg' %}" alt="">
       Войти
     </button>
   </form>
-  {%else%}
+  {% else %}
   <div class="btn-group">
     <button class="btn-profile dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      {% if user.profile_photo %}
       <img class="image-profile" src="{{ user.profile_photo.url }}" alt="Profile Photo">
-      {% if not user.first_name %} {{user.username}} {% else %} {{user.first_name}} {% endif %}
+      {% else %}
+      <img class="image-profile" src="{% static './img/no-avatar.png' %}" alt="Profile Photo">
+      {% endif %}
+      {% if not user.first_name %} {{ user.username }} {% else %} {{ user.first_name }} {% endif %}
     </button>
     <ul class="dropdown-menu">
       <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
