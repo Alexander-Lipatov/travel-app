@@ -3,8 +3,8 @@ from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView
 
-from .models import PostModel
-from .forms import PostsForm
+from posts.models import PostModel
+from posts.forms import PostsForm
 
 
 class HomePageView(ListView):
